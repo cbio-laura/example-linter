@@ -1,21 +1,32 @@
 package todo
 
-// comment without a to do
+import (
+	"fmt"
+)
+
+type myErrors struct {
+}
+
+func (e myErrors) New(code int64, text string) error {
+	return nil
+}
+
+func errorFx(code int64, childErr error, text string) error {
+	return nil
+}
+
+// want "Error number 1001 has already been seen"
 func SomeFunc1() {
-	_ = 1 + 1
+	cberr := errorFx(1001, nil, "Sample error")
+	cberr = errorFx(1001, nil, "Sample error")
+	fmt.Printf("Error: %s", cberr)
 }
 
-// TODO: do something	// want "TODO comment has no author"
+// want "Error number 1002 has already been seen"
 func SomeFunc2() {
-	_ = 1 + 2
-}
+	errors := myErrors{}
 
-// TODO(): do something // want "TODO comment has no author"
-func SomeFunc3() {
-	_ = 1 + 3
-}
-
-// TODO(dbraley): Do something with the value
-func SomeFunc4() {
-	_ = 1 + 4
+	cberr := errors.New(1002, "Sample error")
+	cberr = errors.New(1002, "Sample error")
+	fmt.Printf("Error: %s", cberr)
 }
