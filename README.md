@@ -18,7 +18,7 @@ cberr = errorFx(123, err, "error")
 ## To use in a repo
 
 Step one: custom golangci-lint
-- Build custom `golangci-lint`; start by cloning from ___.
+- Build custom `golangci-lint`; start by cloning from https://github.com/golangci/golangci-lint.
 - Update the `CGO_ENABLED` flag in `.goreleaser.yml` to be 1.
 - Run `make build`
 - Move output binary to your go path
